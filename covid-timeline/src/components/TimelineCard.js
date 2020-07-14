@@ -1,14 +1,23 @@
 import React, { Component } from "react"
 import "./TimelineCard.scss"
+import { Globe, GlobeVirus, GlobeVirus2, Bacteria } from "components/icons"
+import IconComponent from "components/IconComponents"
 
 class TimelineCard extends Component {
 	render() {
-		const { date, description, image } = this.props
+		const { date, description, imageName } = this.props
+		const IconImage = imageName
+		const block = {
+			component: imageName,
+			_uid: 1,
+			height: "100%"
+		}
+
 		return (
 			<div className="card">
 				<h4 className="card__date">{date}</h4>
 				<p className="card__text">{description}</p>
-				<img src="./icons/globe.svg" width="100%" />
+				{IconComponent(block)}
 			</div>
 		)
 	}

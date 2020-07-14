@@ -3,20 +3,20 @@
 		{
 			"date": "December 2019",
 			"description": "First reports of a mysterious illness in Wuhan, China",
-			"image": "globe"
+			"imageName": "globeVirus"
 		},
 		{
 			"date": "January 11, 2020",
-			"description": "China reports first known death caused by the new virus. This news broke just days before one of China's biggest holidays - Chinese New Year",
-			"image": "death"
+			"description": "China reports first known death caused by the new virus. This news broke just days before one of China's biggest holidays - Chinese New Year"
 		},
 		{
 			"date": "January 20-21, 2020",
-			"description": "The virus spreads and cases are reported in Japan, South Korea, Thailand, and the United States"
+			"description": "The virus spreads and cases are reported in Japan, South Korea, Thailand, and the United States",
+			"imageName": "globeVirus2"
 		},
 		{
 			"date": "January 30, 2020",
-			"description": "The World Health Organization (WHO) declares what is now knows as the coronavirus outbreak a global public health emergency. There are over 9,000 reported cases worldwide."
+			"description": "The World Health Organization (WHO) declares what is now known as the coronavirus outbreak a global public health emergency. There are over 9,000 reported cases worldwide."
 		},
 		{
 			"date": "January 31, 2020",
