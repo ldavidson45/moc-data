@@ -1,14 +1,22 @@
 import React from "react"
 import "./App.css"
-import Timeline from "./components/Timeline"
+import { Route, Link, BrowserRouter as Router } from "react-router-dom"
 
 function App() {
 	return (
 		<div>
 			<header className="app-header">
-				<h1>A Timeline Of The Coronavirus Outbreak</h1>
+				<ul>
+					<li>
+						<Link to="/covid-timeline">
+							A Timeline Of The Coronavirus Outbreak
+						</Link>
+					</li>
+					<li>
+						<Link to="/congress">Members of congress</Link>
+					</li>
+				</ul>
 			</header>
-			<Timeline />
 		</div>
 	)
 }
