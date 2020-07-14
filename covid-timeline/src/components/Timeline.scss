@@ -1,0 +1,33 @@
+@import "../index.scss";
+
+.timeline {
+	list-style: none;
+	padding: 20px;
+	margin: 0 auto;
+	position: relative;
+	z-index: 2;
+
+	&::before {
+		content: "";
+		width: 6px;
+		height: 100%;
+		background: $brickRed25;
+		position: absolute;
+		z-index: -1;
+		left: 50%;
+		transform: translate(-50%);
+	}
+
+	&::after {
+		content: "";
+		width: 30px;
+		height: 30px;
+		background: white;
+		border-radius: 50px;
+		position: absolute;
+		border: solid 6px $brickRed25;
+		top: 0px;
+		left: 50%;
+		transform: translate(-50%);
+	}
+}
