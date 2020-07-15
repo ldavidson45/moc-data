@@ -7,7 +7,6 @@ const timelineData = require("./timelinedata.json")
 
 class Timeline extends Component {
 	render() {
-		console.log(process.env)
 		const items = timelineData.dates.map((date, index) => {
 			return (
 				<li className="timeline__item" key={index}>

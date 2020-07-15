@@ -1,7 +1,7 @@
 import React, { Component } from "react"
 import "./TimelineCard.scss"
 import { Globe, GlobeVirus, GlobeVirus2, Bacteria } from "components/icons"
-import IconComponent from "components/IconComponents"
+import IconComponent from "components/covidTimeline/IconComponents"
 
 class TimelineCard extends Component {
 	render() {
