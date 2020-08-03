@@ -1,6 +1,6 @@
 import React from "react"
 import "pages/CongressPage.scss"
-import { getMembers } from "helpers/congressHelpers"
+import { getMembers, getMemberDetails } from "helpers/congressHelpers"
 
 import MemberCard from "components/congress/MemberCard"
 import ModalMemberCard from "components/congress/ModalMemberCard"
@@ -39,11 +39,14 @@ class CongressPage extends React.Component {
 		}
 	}
 
-	handleOpen(member) {
-		this.setState({
-			selectedMember: member
-		})
-		this.toggleModal()
+	async handleOpen(member) {
+		const memberDetails = await getMemberDetails(member)
+		this.setState(
+			{
+				selectedMember: { ...member, ...memberDetails }
+			},
+			this.toggleModal
+		)
 	}
 	render() {
 		const membersList = this.state.members.map((member, index) => {
