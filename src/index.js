@@ -5,15 +5,12 @@ import "./index.scss"
 import App from "./App"
 
 import CongressPage from "pages/CongressPage"
-import CovidTimelinePage from "pages/CovidTimelinePage"
 import * as serviceWorker from "./serviceWorker"
 
 const routing = (
 	<Router>
 		<div>
-			<Route exact path="/" component={App} />
-			<Route path="/congress" component={CongressPage} />
-			<Route path="/covid-timeline" component={CovidTimelinePage} />
+			<Route path="/" component={CongressPage} />
 		</div>
 	</Router>
 )
