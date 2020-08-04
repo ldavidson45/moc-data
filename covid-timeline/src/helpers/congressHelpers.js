@@ -29,7 +29,7 @@ export async function getMemberDetails(member) {
 }
 
 export const sortData = [
-	"A-Z",
+	"Sort By:",
 	"Age: Young to Old",
 	"Age: Old to Young",
 	"Missed Votes Count",
@@ -38,6 +38,7 @@ export const sortData = [
 ]
 
 export function sortMembers(members, event) {
+	console.log(event.target.value)
 	switch (event.target.value) {
 		case "Age: Young to Old":
 			return members.sort(function (a, b) {
@@ -60,7 +61,9 @@ export function sortMembers(members, event) {
 				return b.votes_with_party_pct - a.votes_with_party_pct
 			})
 		default:
-			return members
+			return members.sort(function (a, b) {
+				return a - b
+			})
 	}
 }
 

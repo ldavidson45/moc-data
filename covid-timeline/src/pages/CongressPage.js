@@ -83,20 +83,18 @@ class CongressPage extends React.Component {
 
 		return (
 			<div>
-				<h1>Members Of Congress</h1>
-				<label for="sort-by">Sort by:</label>
-
-				<select
-					name="sort-by"
-					id="pet-select"
-					onInput={this.handleSort}
-				>
-					{sortOptions}
-				</select>
-
+				<div className="members-list__header">
+					<h1>Members Of Congress</h1>
+					<div>
+						<select name="sort-by" onInput={this.handleSort}>
+							{sortOptions}
+						</select>
+					</div>
+				</div>
 				<div className="members-list__container">
 					<ul className="members-list">{membersList}</ul>
 				</div>
+
 				<ModalMemberCard
 					modalIsOpen={this.state.modalIsOpen}
 					toggleModal={this.toggleModal}
