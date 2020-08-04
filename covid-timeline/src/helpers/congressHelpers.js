@@ -3,10 +3,21 @@ const apiUrl = "https://api.propublica.org/congress/v1/"
 const apiHeaders = { "X-API-Key": process.env.REACT_APP_PRO_PUBLICA }
 
 export async function getMembers() {
-	const response = await axios.get(`${apiUrl}116/senate/members.json`, {
+	const senate = await axios.get(
+		`${apiUrl}116/senate/members.json?in_office`,
+		{
+			headers: apiHeaders
+		}
+	)
+
+	const house = await axios.get(`${apiUrl}116/house/members.json?in_office`, {
 		headers: apiHeaders
 	})
-	return await response.data.results[0].members
+
+	const results = await senate.data.results[0].members.concat(
+		await house.data.results[0].members
+	)
+	return results.filter((member) => member.in_office)
 }
 
 export function getPartyName(initial) {
@@ -68,5 +79,13 @@ export function sortMembers(members, event) {
 }
 
 export function memberAge(member) {
-	return new Date() - new Date(member.date_of_birth)
+	const today = new Date()
+	const birthday = new Date(member.date_of_birth)
+
+	const ageInMilliseconds = today - birthday
+
+	// Divide milliseconds by units leading up to a year
+
+	const age = ageInMilliseconds / (1000 * 60 * 60 * 24 * 365)
+	return Math.floor(age) || ""
 }

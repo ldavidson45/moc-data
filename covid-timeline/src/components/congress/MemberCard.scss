@@ -28,11 +28,14 @@
 		border-radius: 50%;
 		overflow: hidden;
 		margin: 0 auto;
+		position: relative;
+		background-image: url("https://image.flaticon.com/icons/svg/760/760039.svg");
 	}
 
 	&__image {
 		width: 100%;
 		height: auto;
+		color: rgba(0, 0, 0, 0);
 	}
 }
 
@@ -58,7 +61,7 @@
 
 	&__last {
 		font-family: "Bebas Neue", cursive;
-		font-size: 2rem;
+		font-size: 1.7rem;
 		white-space: nowrap;
 		font-style: italic;
 	}

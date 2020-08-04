@@ -2,6 +2,7 @@ import React from "react"
 import "./MemberModalCard.scss"
 
 import DonutChart from "./DonutChart"
+import { memberAge } from "helpers/congressHelpers"
 
 class ModalMemberCard extends React.Component {
 	constructor(props) {
@@ -79,6 +80,10 @@ class ModalMemberCard extends React.Component {
 								<td className="details__label">Party</td>
 								<td>{member.party}</td>
 							</tr>
+							<tr className="details__item">
+								<td className="details__label">Age</td>
+								<td>{memberAge(member)}</td>
+							</tr>
 							{member.leadership_role && (
 								<tr className="details__item">
 									<td className="details__label">
@@ -101,6 +106,14 @@ class ModalMemberCard extends React.Component {
 								</td>
 								<td>{member.next_election}</td>
 							</tr>
+							<tr className="details__item">
+								<td className="details__label">Missed Votes</td>
+								<td>
+									{member.missed_votes} of{" "}
+									{member.total_votes} total votes
+								</td>
+							</tr>
+
 							<tr>
 								<td className="details__committees-list">
 									% Votes along party line
@@ -186,10 +199,10 @@ class ModalMemberCard extends React.Component {
 										<li>{member.phone}</li>
 										<li>
 											<a
-												href={member.contact_form}
+												href={member.url}
 												target="_blank"
 											>
-												Contact
+												Website
 											</a>
 										</li>
 									</ul>

@@ -1,12 +1,49 @@
+@import "styles/colors.scss";
+
 .members-list {
 	display: flex;
 	flex-wrap: wrap;
-	justify-content: center;
+
+	&__wrapper {
+		max-width: 1000px;
+		margin: 0 auto;
+	}
 
 	&__header {
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
 		padding: 0 15px;
+	}
+
+	&__tabs {
+		padding: 0 15px;
+		display: flex;
+		align-items: center;
+	}
+
+	&__tab {
+		font-size: 20px;
+		border-radius: 20px;
+		padding: 5px 10px;
+
+		&:first-of-type {
+			margin-right: 20px;
+		}
+
+		&--active {
+			background: $slate27;
+			color: #ffffff;
+		}
+	}
+
+	&__sort-dropdown {
+		margin-left: 50px;
+
+		select {
+			font-size: 15px;
+			border-radius: 20px;
+			padding: 5px 15px;
+		}
 	}
 }
