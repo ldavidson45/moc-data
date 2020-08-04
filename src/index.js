@@ -2,7 +2,6 @@ import React from "react"
 import ReactDOM from "react-dom"
 import { Route, Link, BrowserRouter as Router } from "react-router-dom"
 import "./index.scss"
-import App from "./App"
 
 import CongressPage from "pages/CongressPage"
 import * as serviceWorker from "./serviceWorker"
