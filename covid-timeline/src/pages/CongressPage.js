@@ -1,6 +1,11 @@
 import React from "react"
 import "pages/CongressPage.scss"
-import { getMembers, getMemberDetails } from "helpers/congressHelpers"
+import {
+	getMembers,
+	getMemberDetails,
+	sortData,
+	sortMembers
+} from "helpers/congressHelpers"
 
 import MemberCard from "components/congress/MemberCard"
 import ModalMemberCard from "components/congress/ModalMemberCard"
@@ -18,6 +23,7 @@ class CongressPage extends React.Component {
 		this.toggleModal = this.toggleModal.bind(this)
 		this.handleOpen = this.handleOpen.bind(this)
 		this.clearMemberSelection = this.clearMemberSelection.bind(this)
+		this.handleSort = this.handleSort.bind(this)
 	}
 
 	async componentDidMount() {
@@ -48,6 +54,15 @@ class CongressPage extends React.Component {
 			this.toggleModal
 		)
 	}
+	async handleSort(event) {
+		this.setState(
+			{
+				loading: true,
+				members: await sortMembers(this.state.members, event)
+			},
+			this.setState({ loading: false })
+		)
+	}
 	render() {
 		const membersList = this.state.members.map((member, index) => {
 			return (
@@ -62,9 +77,23 @@ class CongressPage extends React.Component {
 			)
 		})
 
+		const sortOptions = sortData.map((field) => {
+			return <option name={field}>{field}</option>
+		})
+
 		return (
 			<div>
 				<h1>Members Of Congress</h1>
+				<label for="sort-by">Sort by:</label>
+
+				<select
+					name="sort-by"
+					id="pet-select"
+					onInput={this.handleSort}
+				>
+					{sortOptions}
+				</select>
+
 				<div className="members-list__container">
 					<ul className="members-list">{membersList}</ul>
 				</div>

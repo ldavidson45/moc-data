@@ -27,3 +27,43 @@ export async function getMemberDetails(member) {
 	const response = await axios.get(memberApiUrl, { headers: apiHeaders })
 	return await response.data.results[0]
 }
+
+export const sortData = [
+	"A-Z",
+	"Age: Young to Old",
+	"Age: Old to Young",
+	"Missed Votes Count",
+	"Most Votes Against Party",
+	"Most Votes With Party"
+]
+
+export function sortMembers(members, event) {
+	switch (event.target.value) {
+		case "Age: Young to Old":
+			return members.sort(function (a, b) {
+				return memberAge(a) - memberAge(b)
+			})
+		case "Age: Old to Young":
+			return members.sort(function (a, b) {
+				return memberAge(b) - memberAge(a)
+			})
+		case "Missed Votes Count":
+			return members.sort(function (a, b) {
+				return b.missed_votes - a.missed_votes
+			})
+		case "Most Votes Against Party":
+			return members.sort(function (a, b) {
+				return b.votes_against_party_pct - a.votes_against_party_pct
+			})
+		case "Most Votes With Party":
+			return members.sort(function (a, b) {
+				return b.votes_with_party_pct - a.votes_with_party_pct
+			})
+		default:
+			return members
+	}
+}
+
+export function memberAge(member) {
+	return new Date() - new Date(member.date_of_birth)
+}

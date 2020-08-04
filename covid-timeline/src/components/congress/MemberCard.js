@@ -7,12 +7,17 @@ class MemberCard extends React.Component {
 	constructor(props) {
 		super(props)
 		this.state = {
-			imageUrl: `https://theunitedstates.io/images/congress/original/${props.id}.jpg`,
 			fullName: `${props.short_title} ${props.first_name} ${props.last_name}`,
 			description: `${getPartyName(props.party)} from ${
 				stateNames[props.state]
 			}`
 		}
+
+		this.imageUrl = this.imageUrl.bind(this)
+	}
+
+	imageUrl() {
+		return `https://theunitedstates.io/images/congress/original/${this.props.id}.jpg`
 	}
 
 	render() {
@@ -21,7 +26,7 @@ class MemberCard extends React.Component {
 				<div className="member-card__image-wrapper">
 					<img
 						className="member-card__image"
-						src={this.state.imageUrl}
+						src={this.imageUrl()}
 						alt={this.state.fullName}
 					/>
 				</div>
