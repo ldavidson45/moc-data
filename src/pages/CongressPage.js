@@ -67,14 +67,16 @@ class CongressPage extends React.Component {
 		}
 	}
 
-	async handleOpen(member) {
-		const memberDetails = await getMemberDetails(member)
-		this.setState(
-			{
-				selectedMember: { ...member, ...memberDetails }
-			},
-			this.toggleModal
-		)
+	async handleOpen(event, member) {
+		if (event.keyCode === 13 || event.type === "click") {
+			const memberDetails = await getMemberDetails(member)
+			this.setState(
+				{
+					selectedMember: { ...member, ...memberDetails }
+				},
+				this.toggleModal
+			)
+		}
 	}
 	async handleSort(event) {
 		this.setState(
@@ -95,9 +97,10 @@ class CongressPage extends React.Component {
 		const membersList = this.filteredMembers().map((member) => {
 			return (
 				<li
-					onClick={() => {
-						this.handleOpen(member)
+					onClick={(event) => {
+						this.handleOpen(event, member)
 					}}
+					onKeyDown={(event) => this.handleOpen(event, member)}
 					key={member.id}
 				>
 					<MemberCard {...member} key={member.id} />

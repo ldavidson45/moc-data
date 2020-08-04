@@ -14,6 +14,7 @@ class ModalMemberCard extends React.Component {
 		this.handleClick = this.handleClick.bind(this)
 		this.escFunction = this.escFunction.bind(this)
 		this.committees = this.committees.bind(this)
+		this.modalClose = React.createRef()
 	}
 
 	committees() {
@@ -39,11 +40,15 @@ class ModalMemberCard extends React.Component {
 			this.props.toggleModal()
 		}
 	}
-	componentDidUpdate() {
+	componentDidUpdate(prevProps) {
 		if (this.props.modalIsOpen) {
 			document.addEventListener("keyup", this.escFunction, false)
 		} else {
 			document.removeEventListener("keyup", this.escFunction, false)
+		}
+
+		if (!prevProps.modalIsOpen) {
+			this.modalClose.current.focus()
 		}
 	}
 	render() {
@@ -61,6 +66,7 @@ class ModalMemberCard extends React.Component {
 						</h3>
 						<div>
 							<button
+								ref={this.modalClose}
 								className="button-wrapper modal__close-button"
 								onClick={this.props.toggleModal}
 								aria-label="close"

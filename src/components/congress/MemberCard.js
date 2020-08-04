@@ -22,7 +22,10 @@ class MemberCard extends React.Component {
 
 	render() {
 		return (
-			<div className={"member-card member-card--" + this.props.party}>
+			<div
+				className={"member-card member-card--" + this.props.party}
+				tabIndex="0"
+			>
 				<div className="member-card__image-wrapper">
 					<img
 						className="member-card__image"

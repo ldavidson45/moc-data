@@ -12,12 +12,13 @@ button {
 	transition: background 250ms ease-in-out, transform 150ms ease;
 	-webkit-appearance: none;
 	-moz-appearance: none;
-
-	&:focus {
-		outline: 1px $slate30 dashed;
-	}
 }
 
 ul {
 	list-style: none;
+}
+
+*:focus {
+	outline: 1px $slate30 dashed;
+	outline-offset: 2px;
 }
