@@ -1,13 +1,15 @@
 import React from "react"
 import "./MemberModalCard.scss"
 
+import DonutChart from "./DonutChart"
+
 class ModalMemberCard extends React.Component {
 	constructor(props) {
 		super(props)
 		this.state = {
 			committees: []
 		}
-		this.modalContent = React.createRef()
+		this.modalWrapper = React.createRef()
 		this.handleClick = this.handleClick.bind(this)
 		this.escFunction = this.escFunction.bind(this)
 		this.committees = this.committees.bind(this)
@@ -26,7 +28,7 @@ class ModalMemberCard extends React.Component {
 	}
 
 	handleClick(e) {
-		if (e.target !== this.modalContent.current) {
+		if (e.target === this.modalWrapper.current) {
 			this.props.toggleModal()
 		}
 	}
@@ -50,7 +52,7 @@ class ModalMemberCard extends React.Component {
 			this.state.loading && !this.state.member ? (
 				<div> Loading</div>
 			) : (
-				<div className="modal" ref={this.modalContent}>
+				<div className="modal">
 					<div className="modal__header">
 						<h3 className="modal__title">
 							{member.short_title} {member.first_name}{" "}
@@ -82,6 +84,42 @@ class ModalMemberCard extends React.Component {
 									</ul>
 								</td>
 							</tr>
+							<tr className="details__item">
+								<td className="details__label">
+									Next Election Year
+								</td>
+								<td>
+									<ul className="details__committees-list">
+										{member.next_election}
+									</ul>
+								</td>
+							</tr>
+							<tr>
+								<td className="details__committees-list">
+									% Votes along party line
+								</td>
+								<td>
+									<div className="details__chart--party">
+										<DonutChart
+											data={{
+												a: member.votes_with_party_pct,
+												b:
+													member.votes_against_party_pct
+											}}
+										/>
+										<div>
+											<p>
+												{member.votes_with_party_pct}%
+												with party
+											</p>
+											<p>
+												{member.votes_against_party_pct}
+												% against party
+											</p>
+										</div>
+									</div>
+								</td>
+							</tr>
 						</tbody>
 					</table>
 				</div>
@@ -91,6 +129,7 @@ class ModalMemberCard extends React.Component {
 				className={`modal__wrapper ${
 					this.props.modalIsOpen ? "visible" : "hidden"
 				}`}
+				ref={this.modalWrapper}
 				role="dialog"
 				aria-modal="true"
 				onClick={this.handleClick}

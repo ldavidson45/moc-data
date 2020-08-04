@@ -65,4 +65,19 @@
 	&__label {
 		font-weight: 900;
 	}
+
+	&__chart--party {
+		display: flex;
+	}
+}
+
+.d3-container {
+	height: 100px;
+	width: auto;
+	padding: 10px;
+}
+
+#donutChart {
+	height: 100%;
+	width: auto;
 }
