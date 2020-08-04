@@ -1,7 +1,9 @@
+@import "styles/index.scss";
+
 .modal {
 	position: fixed;
 	background: #ffffff;
-	height: 450px;
+	min-height: 450px;
 	width: 500px;
 	border-radius: 10px;
 	top: 50%;
@@ -27,6 +29,10 @@
 	&__title {
 		margin: 0;
 		line-height: 35px;
+	}
+
+	&__close-button {
+		margin: 5px;
 	}
 }
 
@@ -69,6 +75,11 @@
 	&__chart--party {
 		display: flex;
 	}
+
+	&__icon {
+		height: 40px;
+		margin: 5px;
+	}
 }
 
 .d3-container {
@@ -80,4 +91,5 @@
 #donutChart {
 	height: 100%;
 	width: auto;
+	transform: rotate(180deg);
 }

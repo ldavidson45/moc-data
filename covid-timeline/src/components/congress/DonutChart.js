@@ -15,9 +15,13 @@ function DonutChart(props) {
 		.attr("viewBox", `0 0 ${width} ${height}`)
 		.attr("height", "100%")
 		.append("g")
+
 		.attr("transform", "translate(" + width / 2 + "," + height / 2 + ")")
 
-	var color = d3.scaleOrdinal().domain(data).range(["green", "red"])
+	var color = d3
+		.scaleOrdinal()
+		.domain(data)
+		.range(props.colors || ["black", "white"])
 
 	var pie = d3.pie().value(function (d) {
 		return d.value
