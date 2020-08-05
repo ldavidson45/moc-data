@@ -16,6 +16,7 @@ class CongressPage extends React.Component {
 		this.state = {
 			members: [],
 			modalIsOpen: false,
+			modalLoading: true,
 			loading: true,
 			selectedMember: {},
 			chamber: "Sen."
@@ -72,9 +73,10 @@ class CongressPage extends React.Component {
 			const memberDetails = await getMemberDetails(member)
 			this.setState(
 				{
-					selectedMember: { ...member, ...memberDetails }
+					selectedMember: { ...member, ...memberDetails },
+					modalIsOpen: !this.state.modalIsOpen
 				},
-				this.toggleModal
+				this.setState({ modalLoading: false })
 			)
 		}
 	}
@@ -155,6 +157,7 @@ class CongressPage extends React.Component {
 				<ModalMemberCard
 					modalIsOpen={this.state.modalIsOpen}
 					toggleModal={this.toggleModal}
+					modalLoading={this.state.modalLoading}
 					selectedMember={this.state.selectedMember}
 				/>
 			</div>
