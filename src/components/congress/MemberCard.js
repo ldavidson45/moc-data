@@ -1,4 +1,4 @@
-import React, { useEffect } from "react"
+import React from "react"
 import "components/congress/MemberCard.scss"
 import { stateNames } from "helpers/statesData"
 
@@ -18,6 +18,8 @@ class MemberCard extends React.Component {
 
 		this.imageUrl = this.imageUrl.bind(this)
 		this.toggleLoading = this.toggleLoading.bind(this)
+		this.cardImg = React.createRef()
+		this.setImageSize = this.setImageSize.bind(this)
 	}
 
 	componentDidMount() {
@@ -31,44 +33,65 @@ class MemberCard extends React.Component {
 	}
 
 	toggleLoading() {
-		this.setState({
-			imageLoaded: true,
-			loading: false
-		})
+		this.setState(
+			{
+				imageLoaded: true,
+				loading: false
+			},
+			this.setImageSize
+		)
 	}
 
 	imageUrl() {
 		return `https://theunitedstates.io/images/congress/original/${this.props.id}.jpg`
 	}
 
+	setImageSize() {
+		const { height = 0, width = 0 } = this.cardImg.current || {}
+		const style = {
+			display: this.state.imageLoaded ? "block" : "none",
+			width: "100%",
+			height: "auto"
+		}
+		if (height && width && height / width < 1) {
+			style.width = "auto"
+			style.height = "100%"
+		}
+		return style
+	}
+
 	render() {
 		return (
 			<div
-				style={{
-					display: this.state.loading ? "none" : "block"
-				}}
 				className={"member-card member-card--" + this.props.party}
 				tabIndex="0"
 			>
-				<div className="member-card__image-wrapper">
-					<img
-						style={{
-							display: this.state.imageLoaded ? "block" : "none"
-						}}
-						onLoad={this.toggleLoading}
-						className="member-card__image"
-						src={this.imageUrl()}
-						alt={this.state.fullName}
-					/>
-				</div>
-				<div className="member-name">
-					<p className="member-name__first">
-						{this.props.short_title} {this.props.first_name}
-					</p>
-					<p className="member-name__last">{this.props.last_name}</p>
-					<p className="member-name__subtitle">
-						{this.state.description}
-					</p>
+				<div
+					style={{
+						display: this.state.loading ? "none" : "block"
+					}}
+				>
+					<div className="member-card__image-wrapper">
+						<img
+							ref={this.cardImg}
+							style={this.setImageSize()}
+							onLoad={this.toggleLoading}
+							className="member-card__image"
+							src={this.imageUrl()}
+							alt={this.state.fullName}
+						/>
+					</div>
+					<div className="member-name">
+						<p className="member-name__first">
+							{this.props.short_title} {this.props.first_name}
+						</p>
+						<p className="member-name__last">
+							{this.props.last_name}
+						</p>
+						<p className="member-name__subtitle">
+							{this.state.description}
+						</p>
+					</div>
 				</div>
 			</div>
 		)
