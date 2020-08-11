@@ -7,6 +7,7 @@ import {
 	sortMembers
 } from "helpers/congressHelpers"
 
+import Loading from "components/congress/Loading"
 import MemberCard from "components/congress/MemberCard"
 import ModalMemberCard from "components/congress/ModalMemberCard"
 
@@ -26,13 +27,14 @@ class CongressPage extends React.Component {
 		this.handleOpen = this.handleOpen.bind(this)
 		this.clearMemberSelection = this.clearMemberSelection.bind(this)
 		this.handleSort = this.handleSort.bind(this)
-		this.filteredMembers = this.filteredMembers.bind(this)
 		this.setChamber = this.setChamber.bind(this)
 		this.isTabSelected = this.isTabSelected.bind(this)
 		this.tabButtonClasses = this.tabButtonClasses.bind(this)
+		this.listItemsByChamber = this.listItemsByChamber.bind(this)
 	}
 
 	async componentDidMount() {
+		console.log("component did mount")
 		const members = await getMembers()
 		this.setState({ members: await members, loading: false })
 	}
@@ -54,12 +56,6 @@ class CongressPage extends React.Component {
 			? "members-list__tab--active"
 			: ""
 		return `members-list__tab ${selectedClass} button-wrapper `
-	}
-
-	filteredMembers() {
-		return this.state.members.filter(
-			(member) => member.short_title === this.state.chamber
-		)
 	}
 
 	clearMemberSelection() {
@@ -95,20 +91,28 @@ class CongressPage extends React.Component {
 			chamber
 		})
 	}
-	render() {
-		const membersList = this.filteredMembers().map((member) => {
+	listItemsByChamber(chamber) {
+		return this.state.members[chamber].map((member, index) => {
 			return (
 				<li
 					onClick={(event) => {
 						this.handleOpen(event, member)
 					}}
 					onKeyDown={(event) => this.handleOpen(event, member)}
-					key={member.id}
+					key={index + member.id}
 				>
 					<MemberCard {...member} key={member.id} />
 				</li>
 			)
 		})
+	}
+	render() {
+		var senateList
+		var houseList
+		if (this.state.members.senate && this.state.members.house) {
+			senateList = this.listItemsByChamber("senate")
+			houseList = this.listItemsByChamber("house")
+		}
 
 		const sortOptions = sortData.map((field) => {
 			return (
@@ -153,7 +157,25 @@ class CongressPage extends React.Component {
 					</div>
 				</div>
 				<div className="members-list__container">
-					<ul className="members-list">{membersList}</ul>
+					<Loading loading={this.state.loading} />
+					<ul
+						className={`members-list ${
+							this.isTabSelected("Sen.")
+								? ""
+								: "members-list--hidden"
+						}`}
+					>
+						{senateList}
+					</ul>
+					<ul
+						className={`members-list ${
+							this.isTabSelected("Rep.")
+								? ""
+								: "members-list--hidden"
+						}`}
+					>
+						{houseList}
+					</ul>
 				</div>
 
 				<ModalMemberCard

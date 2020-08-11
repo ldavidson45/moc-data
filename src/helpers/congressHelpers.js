@@ -3,21 +3,26 @@ const apiUrl = "https://api.propublica.org/congress/v1/"
 const apiHeaders = { "X-API-Key": process.env.REACT_APP_PRO_PUBLICA }
 
 export async function getMembers() {
+	console.log("getting members")
 	const senate = await axios.get(
-		`${apiUrl}116/senate/members.json?in_office`,
+		`${apiUrl}116/senate/members.json?in_office=true`,
 		{
 			headers: apiHeaders
 		}
 	)
 
-	const house = await axios.get(`${apiUrl}116/house/members.json?in_office`, {
-		headers: apiHeaders
-	})
-
-	const results = await senate.data.results[0].members.concat(
-		await house.data.results[0].members
+	const house = await axios.get(
+		`${apiUrl}116/house/members.json?in_office=true`,
+		{
+			headers: apiHeaders
+		}
 	)
-	return results.filter((member) => member.in_office)
+
+	const results = {
+		senate: await senate.data.results[0].members,
+		house: await house.data.results[0].members
+	}
+	return results
 }
 
 export function getPartyName(initial) {

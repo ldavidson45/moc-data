@@ -65,4 +65,17 @@
 			margin-top: 15px;
 		}
 	}
+
+	&__container {
+		min-height: 100vh;
+		position: relative;
+	}
+
+	&--hidden {
+		position: absolute;
+		height: 0px;
+		width: 0px;
+		overflow: hidden;
+		left: -50000;
+	}
 }

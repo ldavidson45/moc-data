@@ -1,0 +1,30 @@
+.loading {
+	position: absolute;
+	top: 20%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	z-index: 4;
+
+	&__spinner {
+		height: 50px;
+		width: 50px;
+		position: relative;
+		animation: spin 1.5s infinite linear;
+	}
+}
+
+.hidden {
+	display: none;
+}
+
+@keyframes spin {
+	from {
+		transform: rotate(0deg);
+	}
+	to {
+		transform: rotate(360deg);
+	}
+}

@@ -57,7 +57,7 @@ class ModalMemberCard extends React.Component {
 		const content = this.props.modalLoading ? (
 			<div> Loading</div>
 		) : (
-			<div class="modal__content">
+			<div className="modal__content">
 				<div className="modal__header">
 					<h3 className="modal__title">
 						{member.short_title} {member.first_name}{" "}

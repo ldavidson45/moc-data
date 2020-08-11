@@ -1,6 +1,7 @@
 import React from "react"
 import "components/congress/MemberCard.scss"
 import { stateNames } from "helpers/statesData"
+import Loading from "components/congress/Loading"
 
 import { getPartyName } from "helpers/congressHelpers"
 class MemberCard extends React.Component {
@@ -12,24 +13,13 @@ class MemberCard extends React.Component {
 				stateNames[props.state]
 			}`,
 			loading: true,
-			imageLoaded: false,
-			timer: undefined
+			imageLoaded: false
 		}
 
 		this.imageUrl = this.imageUrl.bind(this)
 		this.toggleLoading = this.toggleLoading.bind(this)
 		this.cardImg = React.createRef()
 		this.setImageSize = this.setImageSize.bind(this)
-	}
-
-	componentDidMount() {
-		this.setState({
-			timer: setTimeout(() => this.setState({ loading: false }), 3000)
-		})
-	}
-
-	componentWillUnmount() {
-		clearTimeout(this.state.timer)
 	}
 
 	toggleLoading() {
@@ -49,7 +39,7 @@ class MemberCard extends React.Component {
 	setImageSize() {
 		const { height = 0, width = 0 } = this.cardImg.current || {}
 		const style = {
-			display: this.state.imageLoaded ? "block" : "none",
+			visibility: this.state.imageLoaded ? "visible" : "hidden",
 			width: "100%",
 			height: "auto"
 		}
@@ -66,11 +56,7 @@ class MemberCard extends React.Component {
 				className={"member-card member-card--" + this.props.party}
 				tabIndex="0"
 			>
-				<div
-					style={{
-						display: this.state.loading ? "none" : "block"
-					}}
-				>
+				<div>
 					<div className="member-card__image-wrapper">
 						<img
 							ref={this.cardImg}
