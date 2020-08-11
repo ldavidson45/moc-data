@@ -57,7 +57,7 @@ class ModalMemberCard extends React.Component {
 		const content = this.props.modalLoading ? (
 			<div> Loading</div>
 		) : (
-			<div>
+			<div class="modal__content">
 				<div className="modal__header">
 					<h3 className="modal__title">
 						{member.short_title} {member.first_name}{" "}
@@ -154,11 +154,13 @@ class ModalMemberCard extends React.Component {
 											member.twitter_account
 										}
 										target="_blank"
+										rel="noopener noreferrer"
 										aria-label="twitter account"
 									>
 										<img
 											className="details__icon"
 											src="https://image.flaticon.com/icons/svg/1384/1384017.svg"
+											alt=""
 										/>
 									</a>
 								)}
@@ -169,10 +171,12 @@ class ModalMemberCard extends React.Component {
 											member.facebook_account
 										}
 										target="_blank"
+										rel="noopener noreferrer"
 										aria-label="facebook page"
 									>
 										<img
 											className="details__icon"
+											alt=""
 											src="https://image.flaticon.com/icons/svg/1384/1384005.svg"
 										/>
 									</a>
@@ -185,11 +189,13 @@ class ModalMemberCard extends React.Component {
 											member.youtube_account
 										}
 										target="_blank"
+										rel="noopener noreferrer"
 										aria-label="youtube channel"
 									>
 										<img
 											className="details__icon"
 											src="https://image.flaticon.com/icons/svg/1384/1384012.svg"
+											alt=""
 										/>
 									</a>
 								)}
@@ -220,6 +226,7 @@ class ModalMemberCard extends React.Component {
 												member.fec_candidate_id
 											}
 											target="_blank"
+											rel="noopener noreferrer"
 										>
 											FEC Data
 										</a>
@@ -235,6 +242,7 @@ class ModalMemberCard extends React.Component {
 												member.govtrack_id
 											}
 											target="_blank"
+											rel="noopener noreferrer"
 										>
 											Govtrack
 										</a>

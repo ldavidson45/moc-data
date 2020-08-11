@@ -124,26 +124,28 @@ class CongressPage extends React.Component {
 					<h1>Members Of Congress</h1>
 				</div>
 				<div className="members-list__tabs">
-					<button
-						onClick={() => {
-							this.setChamber("Sen.")
-						}}
-						className={this.tabButtonClasses("Sen.")}
-						name="Sen."
-						aria-pressed={this.isTabSelected("Sen.")}
-					>
-						Senate
-					</button>
-					<button
-						onClick={() => {
-							this.setChamber("Rep.")
-						}}
-						className={this.tabButtonClasses("Rep.")}
-						name="Rep."
-						aria-pressed={this.isTabSelected("Rep.")}
-					>
-						House
-					</button>
+					<div className="members-list__tabs--button-container">
+						<button
+							onClick={() => {
+								this.setChamber("Sen.")
+							}}
+							className={this.tabButtonClasses("Sen.")}
+							name="Sen."
+							aria-pressed={this.isTabSelected("Sen.")}
+						>
+							Senate
+						</button>
+						<button
+							onClick={() => {
+								this.setChamber("Rep.")
+							}}
+							className={this.tabButtonClasses("Rep.")}
+							name="Rep."
+							aria-pressed={this.isTabSelected("Rep.")}
+						>
+							House
+						</button>
+					</div>
 					<div className="members-list__sort-dropdown">
 						<select name="sort-by" onInput={this.handleSort}>
 							{sortOptions}
