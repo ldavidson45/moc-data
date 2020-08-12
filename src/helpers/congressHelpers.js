@@ -3,7 +3,6 @@ const apiUrl = "https://api.propublica.org/congress/v1/"
 const apiHeaders = { "X-API-Key": process.env.REACT_APP_PRO_PUBLICA }
 
 export async function getMembers() {
-	console.log("getting members")
 	const senate = await axios.get(
 		`${apiUrl}116/senate/members.json?in_office=true`,
 		{
@@ -54,7 +53,6 @@ export const sortData = [
 ]
 
 export function sortMembers(members, event) {
-	console.log(event.target.value)
 	switch (event.target.value) {
 		case "Age: Young to Old":
 			return members.sort(function (a, b) {

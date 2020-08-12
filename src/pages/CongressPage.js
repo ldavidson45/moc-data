@@ -34,7 +34,6 @@ class CongressPage extends React.Component {
 	}
 
 	async componentDidMount() {
-		console.log("component did mount")
 		const members = await getMembers()
 		this.setState({ members: await members, loading: false })
 	}
