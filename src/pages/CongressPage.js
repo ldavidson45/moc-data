@@ -80,13 +80,9 @@ class CongressPage extends React.Component {
 			house: sortMembers(this.state.members.house, event),
 			senate: sortMembers(this.state.members.senate, event)
 		}
-		this.setState(
-			{
-				loading: true,
-				members: sortedMembers
-			},
-			this.setState({ loading: false })
-		)
+		this.setState({
+			members: sortedMembers
+		})
 	}
 
 	setChamber(chamber) {
