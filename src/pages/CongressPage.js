@@ -76,10 +76,14 @@ class CongressPage extends React.Component {
 		}
 	}
 	async handleSort(event) {
+		const sortedMembers = {
+			house: sortMembers(this.state.members.house, event),
+			senate: sortMembers(this.state.members.senate, event)
+		}
 		this.setState(
 			{
 				loading: true,
-				members: await sortMembers(this.state.members, event)
+				members: sortedMembers
 			},
 			this.setState({ loading: false })
 		)
