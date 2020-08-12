@@ -9,7 +9,11 @@ class Loading extends Component {
 	render() {
 		console.log(this.props)
 		return (
-			<div className={this.props.loading ? "loading visible" : "loading"}>
+			<div
+				className={
+					this.props.loading ? "loading visible" : "loading hidden"
+				}
+			>
 				<div className="loading__spinner">
 					<svg viewBox="0 0 83.736137 83.716446">
 						<g
